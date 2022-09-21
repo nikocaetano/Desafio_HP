@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import * as S from "../Styled/style-staff"
 
-function API(){
+const Staffs = () => {
     const [data, setData] = useState([])
+    
+    const Api = 'https://hp-api.herokuapp.com/api/characters/staff';
+
 
     useEffect(() => {
-        axios.get('http://hp-api.herokuapp.com/api/characters')
+        axios.get(Api)
         .then((res) => {
             setData(res.data);
             console.log(data)
@@ -16,16 +20,16 @@ function API(){
     }, [data])
 
     return(
-        <section>
-            {data.slice(0, 25).map((item) => (
+        <S.Section>
+            {data.slice(0, 8).map((item) => (
                 <ul>
-                    <li>{item.name}</li>
-                    <img src={item.image} alt={item.name}/>
+                    <S.Name>{item.name}</S.Name>
+                    <S.Image src={item.image} alt={item.name}/>
                     
                 </ul>
             ))}
-        </section>
+        </S.Section>
     )
 }
 
-export default API
+export default Staffs

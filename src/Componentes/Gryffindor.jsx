@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import * as S from "../Styled/style-gryffindor"
 
-function API(){
+const Gryffindor = () => {
     const [data, setData] = useState([])
+    
+    const Api = 'http://hp-api.herokuapp.com/api/characters/house/gryffindor';
 
     useEffect(() => {
-        axios.get('http://hp-api.herokuapp.com/api/characters')
+        axios.get(Api)
         .then((res) => {
             setData(res.data);
             console.log(data)
@@ -16,16 +19,16 @@ function API(){
     }, [data])
 
     return(
-        <section>
-            {data.slice(0, 25).map((item) => (
+        <S.Section>
+            {data.slice(0, 9).map((item) => (
                 <ul>
-                    <li>{item.name}</li>
-                    <img src={item.image} alt={item.name}/>
+                    <S.Name>{item.name}</S.Name>
+                    <S.Image src={item.image} alt={item.name}/>
                     
                 </ul>
             ))}
-        </section>
+        </S.Section>
     )
 }
 
-export default API
+export default Gryffindor
